@@ -1,0 +1,74 @@
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "search.exclude": {
+    "package-lock.json": true
+  },
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports",
+    "source.fixAll.eslint"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib", // Use the workspace version of TypeScript
+  "typescript.enablePromptUseWorkspaceTsdk": true, // For security reasons it's require that users opt into using the workspace version of typescript
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    // useRouter should be imported from `next/navigation` instead of `next/router`
+    "next/router.d.ts",
+    "next/dist/client/router.d.ts",
+    // give priority for Link to next/link instead of lucide-react
+    "lucide-react"
+  ],
+  "typescript.preferences.preferTypeOnlyAutoImports": true, // Prefer type-only imports
+  "testing.openTesting": "neverOpen", // Don't open the testing view automatically when running tests
+  // Multiple language settings for json and jsonc files
+  "[json][jsonc][yaml]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.ignorePath": ".gitignore", // Don't run prettier for files listed in .gitignore
+  "i18n-ally.keystyle": "nested",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  // "stylelint.enable": true,
+  // "stylelint.validate": [
+  //   "css",
+  //   "scss",
+  //   "javascript",
+  //   "javascriptreact",
+  //   "typescript",
+  //   "typescriptreact"
+  // ],
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  // "typescript.inlayHints.variableTypes.enabled": true,
+  // "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  // "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "cSpell.words": [
+    "backoff",
+    "chatgpt",
+    "commitlint",
+    "dalle",
+    "datetime",
+    "davinci",
+    "headlessui",
+    "jsdelivr",
+    "knip",
+    "mdast",
+    "micromark",
+    "npmmirror",
+    "ooba",
+    "tabler",
+    "typecheck",
+    "unist"
+  ],
+  "markdown.extension.toc.updateOnSave": false,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#0B3603",
+    "titleBar.activeBackground": "#0F4B04",
+    "titleBar.activeForeground": "#EEFEEB"
+  },
+  "i18n-ally.localesPaths": ["src/locales"]
+}
