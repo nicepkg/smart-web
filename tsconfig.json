@@ -54,5 +54,5 @@
     "*.cjs",
     "*.mjs"
   ],
-  "exclude": ["./out/**/*", "./node_modules/**/*", "dist"]
+  "exclude": ["./out/**/*", "./node_modules/**/*", "dist", "cz-adapter.cjs"]
 }
