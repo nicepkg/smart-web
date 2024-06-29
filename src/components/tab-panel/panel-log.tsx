@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { useLogStore } from '@/store/log.store'
-import { List, ListItem, ListItemText } from '@mui/material'
 
 export default function PanelLog() {
   const { logItems } = useLogStore()
@@ -13,17 +12,19 @@ export default function PanelLog() {
   }, [logItems])
 
   return (
-    <List dense sx={{}}>
-      {logItems.map((item, index) => (
-        <ListItem key={index}>
-          <ListItemText
-            primary={item}
-            sx={{ typography: 'overline', lineHeight: 'normal', px: 0, my: 0 }}
-            disableTypography
-          />
-        </ListItem>
-      ))}
+    <div className=":uno: h-64 overflow-y-auto rounded-lg bg-gray-50 p-4 shadow-inner">
+      <h2 className=":uno: mb-3 text-lg text-gray-700 font-semibold">Log</h2>
+      <ul className=":uno: space-y-1">
+        {logItems.map((item, index) => (
+          <li
+            key={index}
+            className=":uno: rounded bg-white px-3 py-2 text-xs text-gray-600 font-mono shadow-sm"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
       <div ref={endOfList} />
-    </List>
+    </div>
   )
 }

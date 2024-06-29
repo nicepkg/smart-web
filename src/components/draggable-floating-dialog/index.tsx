@@ -1,96 +1,79 @@
-import React, { useId, useState } from 'react'
-import {
-  Breakpoint,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogProps,
-  DialogTitle,
-  Icon,
-  IconButton
-} from '@mui/material'
-import Draggable, { DraggableProps } from 'react-draggable'
+import React, { useRef, useState } from 'react'
+import { Close } from '@icon-park/react'
+import Draggable from 'react-draggable'
+
+import { useHashId } from '@/hooks/use-hash-id'
 
 interface DraggableFloatingDialogProps {
   title: string
   canBeClosed?: boolean
-  handleClose?: () => void
+  onClose?: () => void
   actions?: React.ReactNode
-  draggableProps?: Partial<DraggableProps>
-  dialogProps?: Partial<DialogProps>
-  maxWidth?: Breakpoint
+  draggableProps?: Partial<React.ComponentProps<typeof Draggable>>
+  dialogProps?: React.HTMLAttributes<HTMLDivElement>
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  children?: React.ReactNode
 }
 
 export default function DraggableFloatingDialog({
   title,
   canBeClosed = true,
-  handleClose,
+  onClose,
   actions,
   draggableProps,
   dialogProps,
-  maxWidth,
+  maxWidth = 'md',
   children
-}: DraggableFloatingDialogProps & { children?: React.ReactNode }) {
-  const [open, setOpen] = useState(true)
-  const nodeRef = React.useRef(null)
-  const titleId = useId()
+}: DraggableFloatingDialogProps) {
+  const [isOpen, setIsOpen] = useState(true)
+  const nodeRef = useRef(null)
+  const titleId = useHashId()
 
-  const handleDialogClose = () => {
-    setOpen(false)
-    if (handleClose) {
-      handleClose()
-    }
+  const handleClose = () => {
+    setIsOpen(false)
+    onClose?.()
   }
 
-  return (
-    open && (
-      <Draggable
-        handle={`#${titleId}`}
-        cancel={'[class*="MuiDialogContent-root"]'}
-        nodeRef={nodeRef}
-        {...draggableProps}
-      >
-        <div className="floating-overlay" ref={nodeRef}>
-          <Dialog
-            open
-            hideBackdrop
-            disableEnforceFocus
-            disableAutoFocus
-            disableScrollLock
-            disablePortal
-            maxWidth={maxWidth || 'xs'}
-            aria-labelledby={titleId}
-            container={() =>
-              document.querySelector('.floating-overlay') as HTMLElement
-            }
-            {...dialogProps}
-          >
-            <DialogTitle style={{ cursor: 'move' }} id={titleId}>
-              {title}
-            </DialogTitle>
+  if (!isOpen) return null
 
+  return (
+    <Draggable handle={`#${titleId}`} nodeRef={nodeRef} {...draggableProps}>
+      <div
+        ref={nodeRef}
+        className=":uno: pointer-events-none fixed inset-0 z-99 flex touch-none select-none items-center justify-center"
+      >
+        <div
+          role="dialog"
+          aria-labelledby={titleId}
+          className={`:uno: bg-white rounded-lg shadow-xl overflow-hidden pointer-events-auto
+                      transform transition-all max-w-${maxWidth} w-full`}
+          {...dialogProps}
+        >
+          <div
+            id={titleId}
+            className=":uno: flex cursor-move items-center justify-between bg-gray-100 p-4"
+          >
+            <h2 className=":uno: text-xl text-gray-800 font-semibold">
+              {title}
+            </h2>
             {canBeClosed && (
-              <IconButton
-                aria-label="close"
-                onClick={handleDialogClose}
-                sx={{
-                  position: 'absolute',
-                  right: 8,
-                  top: 8,
-                  color: theme => theme.palette.grey[500]
-                }}
+              <div
+                onClick={handleClose}
+                className=":uno: cursor-pointer text-gray-500 transition-colors hover:text-gray-700"
+                aria-label="Close dialog"
               >
-                <Icon>close</Icon>
-              </IconButton>
+                <Close theme="outline" size="24" className=":uno: h-6 w-6" />
+              </div>
             )}
-            <DialogContent dividers sx={{ p: 0 }}>
-              <DialogContentText component="div">{children}</DialogContentText>
-            </DialogContent>
-            {actions && <DialogActions>{actions}</DialogActions>}
-          </Dialog>
+          </div>
+          <div className=":uno: dialog-content p-6">{children}</div>
+          {actions && (
+            <div className=":uno: flex justify-end bg-gray-50 p-4 space-x-3">
+              {actions}
+            </div>
+          )}
         </div>
-      </Draggable>
-    )
+      </div>
+    </Draggable>
   )
 }

@@ -1,9 +1,11 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 // eslint-disable-next-line unused-imports/no-unused-imports
 import react from '@vitejs/plugin-react'
 import reactSwc from '@vitejs/plugin-react-swc'
 import dotenv from 'dotenv'
 import { visualizer } from 'rollup-plugin-visualizer'
+import Unocss from 'unocss/vite'
 import { defineConfig, type ConfigEnv, type PluginOption } from 'vite'
 import importer from 'vite-plugin-importer'
 import monkey, { cdn } from 'vite-plugin-monkey'
@@ -14,9 +16,7 @@ import packageJson from './package.json'
 dotenv.config()
 
 function createReactPlugin(command: ConfigEnv['command']) {
-  const swc = reactSwc({
-    jsxImportSource: '@emotion/react'
-  })
+  const swc = reactSwc()
 
   const babel = react()
 
@@ -47,6 +47,7 @@ export default defineConfig(({ command }) => ({
   },
   plugins: [
     tsconfigPaths(),
+    Unocss(),
     createReactPlugin(command),
     ...createImportPlugins(command),
     monkey({
@@ -81,21 +82,13 @@ export default defineConfig(({ command }) => ({
             'umd/react-dom.production.min.js'
           ),
           i18next: cdn.npmmirror('i18next', 'dist/umd/i18next.min.js'),
-          '@emotion/react': cdn.npmmirror(
-            'emotionReact',
-            'dist/emotion-react.umd.min.js'
-          ),
-          '@emotion/styled': cdn.npmmirror(
-            'emotionStyled',
-            'dist/emotion-styled.umd.min.js'
-          ),
-          '@mui/material': cdn.npmmirror(
-            'MaterialUI',
-            'umd/material-ui.production.min.js'
-          ),
           'react-draggable': cdn.npmmirror(
             'ReactDraggable',
             'build/web/react-draggable.min.js'
+          ),
+          'zustand/middleware': cdn.npmmirror(
+            'zustandMiddleware',
+            'umd/middleware.production.js'
           )
         }
       },

@@ -47,8 +47,10 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   // "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "cSpell.words": [
+    "Attributify",
     "backoff",
     "chatgpt",
+    "clsx",
     "commitlint",
     "dalle",
     "datetime",
@@ -60,6 +62,7 @@
     "micromark",
     "npmmirror",
     "ooba",
+    "Shadcn",
     "tabler",
     "typecheck",
     "unist",

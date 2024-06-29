@@ -22,7 +22,7 @@
     "allowUnreachableCode": false,
     "noFallthroughCasesInSwitch": true,
 
-    "target": "es2017",
+    "target": "es2020",
     "outDir": "dist",
     "sourceMap": true,
 

@@ -1,35 +1,17 @@
-import { Button, Icon } from '@mui/material'
+import Button from '@/components/button'
 
 export default function PanelActions() {
   return (
-    <>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<Icon>add</Icon>}
-        sx={{ mr: 1 }}
-      >
+    <div className=":uno: flex space-x-2">
+      <Button loading variant="primary" size="md">
         新建
       </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<Icon>edit</Icon>}
-        sx={{ mr: 1 }}
-      >
+      <Button variant="secondary" size="md">
         编辑
       </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<Icon>delete</Icon>}
-        sx={{ mr: 1 }}
-      >
+      <Button variant="outline" size="md">
         删除
       </Button>
-    </>
+    </div>
   )
 }

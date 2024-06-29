@@ -39,6 +39,7 @@
       "parser": "@typescript-eslint/parser",
       "extends": [
         "eslint:recommended",
+        "@unocss",
         "plugin:@typescript-eslint/recommended",
         "plugin:react-hooks/recommended",
         "plugin:react/recommended",

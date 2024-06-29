@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { Tabs } from '@mui/material'
-import Box from '@mui/material/Box'
-import Tab from '@mui/material/Tab'
+import clsx from 'clsx'
 
 import PanelAbout from './panel-about'
 import PanelLog from './panel-log'
@@ -25,61 +23,54 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box
-          sx={{
-            p: 0,
-            maxWidth: 280,
-            maxHeight: 300,
-            minWidth: 260,
-            minHeight: 200,
-            overflow: 'auto'
-          }}
-        >
+        <div className=":uno: max-h-[300px] max-w-[280px] min-h-[200px] min-w-[260px] overflow-auto p-4">
           {children}
-        </Box>
+        </div>
       )}
     </div>
   )
 }
 
-function a11yProps(index: number) {
-  return {
-    id: `cx-auto-tab-${index}`,
-    'aria-controls': `cx-auto-tabpanel-${index}`
-  }
-}
-
 export default function TabPanel() {
   const [tab, setTab] = useState(0)
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (newValue: number) => {
     setTab(newValue)
   }
 
+  const tabs = [
+    { label: '状态', content: <PanelLog /> },
+    { label: '设定', content: <PanelSettings /> },
+    { label: '关于', content: <PanelAbout /> }
+  ]
+
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          value={tab}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label="状态" {...a11yProps(0)} />
-          <Tab label="设定" {...a11yProps(1)} />
-          <Tab label="关于" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-      <CustomTabPanel value={tab} index={0}>
-        <PanelLog />
-      </CustomTabPanel>
-      <>
-        <CustomTabPanel value={tab} index={1}>
-          <PanelSettings />
+    <div className=":uno: w-full">
+      <div className=":uno: border-b border-gray-200">
+        <nav className=":uno: flex" aria-label="Tabs">
+          {tabs.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleChange(index)}
+              className={clsx(
+                ':uno: py-2 px-4 text-sm font-medium border-b-2  transition-colors duration-200',
+                tab === index
+                  ? ':uno: border-blue-500 text-blue-600'
+                  : ':uno: border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              )}
+              id={`cx-auto-tab-${index}`}
+              aria-controls={`cx-auto-tabpanel-${index}`}
+            >
+              {item.label}
+            </div>
+          ))}
+        </nav>
+      </div>
+      {tabs.map((item, index) => (
+        <CustomTabPanel key={index} value={tab} index={index}>
+          {item.content}
         </CustomTabPanel>
-        <CustomTabPanel value={tab} index={2}>
-          <PanelAbout />
-        </CustomTabPanel>
-      </>
-    </Box>
+      ))}
+    </div>
   )
 }

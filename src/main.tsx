@@ -1,3 +1,5 @@
+import 'virtual:uno.css'
+
 import { onloadSafe } from '@/helpers/utils'
 import sentinel from 'sentinel-js'
 
