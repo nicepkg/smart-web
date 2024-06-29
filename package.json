@@ -33,17 +33,20 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@floating-ui/react": "^0.26.18",
     "@icon-park/react": "^1.4.2",
+    "@mui/material": "^5.15.21",
     "eventemitter3": "^5.0.1",
+    "i": "^0.3.7",
     "i18next": "^23.11.5",
+    "pnpm": "^9.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-draggable": "^4.4.6",
     "react-i18next": "^14.1.2",
-    "sanitize-filename": "^1.6.3",
     "sentinel-js": "^0.0.7",
     "urlcat": "^3.1.0",
-    "vite-plugin-monkey": "^4.0.3"
+    "vite-plugin-monkey": "^4.0.4",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

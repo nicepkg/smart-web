@@ -3,7 +3,7 @@
 import react from '@vitejs/plugin-react'
 import reactSwc from '@vitejs/plugin-react-swc'
 import dotenv from 'dotenv'
-import visualizer from 'rollup-plugin-visualizer'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig, type ConfigEnv, type PluginOption } from 'vite'
 import importer from 'vite-plugin-importer'
 import monkey, { cdn } from 'vite-plugin-monkey'
@@ -88,6 +88,14 @@ export default defineConfig(({ command }) => ({
           '@emotion/styled': cdn.npmmirror(
             'emotionStyled',
             'dist/emotion-styled.umd.min.js'
+          ),
+          '@mui/material': cdn.npmmirror(
+            'MaterialUI',
+            'umd/material-ui.production.min.js'
+          ),
+          'react-draggable': cdn.npmmirror(
+            'ReactDraggable',
+            'build/web/react-draggable.min.js'
           )
         }
       },

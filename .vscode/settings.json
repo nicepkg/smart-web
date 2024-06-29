@@ -62,7 +62,8 @@
     "ooba",
     "tabler",
     "typecheck",
-    "unist"
+    "unist",
+    "zustand"
   ],
   "markdown.extension.toc.updateOnSave": false,
   "workbench.colorCustomizations": {

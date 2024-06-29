@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 *.local
 .turbo
+stats.html
 
 # Editor directories and files
 .idea
